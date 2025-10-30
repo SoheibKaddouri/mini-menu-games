@@ -73,7 +73,7 @@ footer{margin-top:18px;color:var(--muted);font-size:13px}
 <!-- Guessing game view -->
 <section id="view-guess" style="display:none">
 <div class="title">Guessing Game</div>
-<p class="muted">I'm thinking of a number between 1 and 100. Can you guess it?</p>
+<p class="muted">I'm thinking of a number between 1 and 100. You have 5 attempts!</p>
 <label for="guess-input">Enter your guess</label>
 <input id="guess-input" type="number" min="1" max="100" />
 <div style="height:8px"></div>
@@ -82,12 +82,12 @@ footer{margin-top:18px;color:var(--muted);font-size:13px}
 <button class="btn ghost" id="guess-new">New Game</button>
 </div>
 <div class="output" id="guess-output">Make your first guess!</div>
-<div class="hint" id="guess-attempts"></div>
+<div class="hint" id="guess-attempts">Attempts: 0/5</div>
 </section>
 </main>
 </div>
 
-<footer>Made with HTML, CSS, and JavaScript</footer>
+<footer></footer>
 </div>
 
 <script>
@@ -175,7 +175,7 @@ function newGame() {
   gameOver = false;
   guessInput.value = '';
   guessOutput.textContent = 'Make your first guess!';
-  guessAttempts.textContent = '';
+  guessAttempts.textContent = 'Attempts: 0/5';
   guessInput.disabled = false;
   guessSubmit.disabled = false;
 }
@@ -197,12 +197,18 @@ guessSubmit.addEventListener('click', () => {
     gameOver = true;
     guessInput.disabled = true;
     guessSubmit.disabled = true;
+  } else if (attempts >= 5) {
+    guessOutput.innerHTML = `<span class="danger">😞 Game Over! You've used all 5 attempts. The number was ${targetNumber}.</span>`;
+    guessAttempts.textContent = `Attempts: ${attempts}/5`;
+    gameOver = true;
+    guessInput.disabled = true;
+    guessSubmit.disabled = true;
   } else if (guess < targetNumber) {
     guessOutput.innerHTML = '<span class="muted">📈 Too low! Try a higher number.</span>';
-    guessAttempts.textContent = `Attempts: ${attempts}`;
+    guessAttempts.textContent = `Attempts: ${attempts}/5`;
   } else {
     guessOutput.innerHTML = '<span class="muted">📉 Too high! Try a lower number.</span>';
-    guessAttempts.textContent = `Attempts: ${attempts}`;
+    guessAttempts.textContent = `Attempts: ${attempts}/5`;
   }
   
   guessInput.value = '';
