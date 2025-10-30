@@ -42,8 +42,8 @@ footer{margin-top:18px;color:var(--muted);font-size:13px}
 <body>
 <div class="container">
 <header>
-<h1>Calculator + Guessing Game</h1>
-<div class="muted">A single-page HTML/CSS/JS app converted from your Python program</div>
+<h1>Our Menu</h1>
+<div class="muted"></div>
 </header>
 
 
@@ -67,6 +67,155 @@ footer{margin-top:18px;color:var(--muted);font-size:13px}
 <button class="btn ghost" id="factor-clear">Clear</button>
 </div>
 <div class="output" id="factor-output">Result will appear here.</div>
-<div class="hint">Note: large factorials grow quickly — this page restricts n ≤ 100 to avoid extremely long numbers. For >20 the result may not be useful for everyday display but is computed precisely using BigInt in JS.</div>
+<div class="hint">Note: large factorials grow quickly — this page restricts n ≤ 100 to avoid extremely long numbers. For >20 the result may not be useful for everyday display but is computed precisely.</div>
 </section>
 
+<!-- Guessing game view -->
+<section id="view-guess" style="display:none">
+<div class="title">Guessing Game</div>
+<p class="muted">I'm thinking of a number between 1 and 100. Can you guess it?</p>
+<label for="guess-input">Enter your guess</label>
+<input id="guess-input" type="number" min="1" max="100" />
+<div style="height:8px"></div>
+<div class="row">
+<button class="btn" id="guess-submit">Submit Guess</button>
+<button class="btn ghost" id="guess-new">New Game</button>
+</div>
+<div class="output" id="guess-output">Make your first guess!</div>
+<div class="hint" id="guess-attempts"></div>
+</section>
+</main>
+</div>
+
+<footer>Made with HTML, CSS, and JavaScript</footer>
+</div>
+
+<script>
+// Menu navigation
+const menuFactorial = document.getElementById('menu-factorial');
+const menuGuess = document.getElementById('menu-guess');
+const menuReset = document.getElementById('menu-reset');
+const viewFactorial = document.getElementById('view-factorial');
+const viewGuess = document.getElementById('view-guess');
+
+function showView(view) {
+  viewFactorial.style.display = 'none';
+  viewGuess.style.display = 'none';
+  menuFactorial.classList.remove('active');
+  menuGuess.classList.remove('active');
+  
+  if (view === 'factorial') {
+    viewFactorial.style.display = 'block';
+    menuFactorial.classList.add('active');
+  } else if (view === 'guess') {
+    viewGuess.style.display = 'block';
+    menuGuess.classList.add('active');
+  }
+}
+
+menuFactorial.addEventListener('click', () => showView('factorial'));
+menuGuess.addEventListener('click', () => showView('guess'));
+menuReset.addEventListener('click', () => {
+  if (confirm('Reset everything? This will clear all results and start fresh.')) {
+    location.reload();
+  }
+});
+
+// Factorial Calculator
+const factorInput = document.getElementById('factor-input');
+const factorCalc = document.getElementById('factor-calc');
+const factorClear = document.getElementById('factor-clear');
+const factorOutput = document.getElementById('factor-output');
+
+function calculateFactorial(n) {
+  if (n < 0) return 'Error: Negative numbers not allowed';
+  if (n > 100) return 'Error: Number too large (max 100)';
+  if (!Number.isInteger(n)) return 'Error: Please enter a whole number';
+  
+  let result = BigInt(1);
+  for (let i = 2; i <= n; i++) {
+    result *= BigInt(i);
+  }
+  return result.toString();
+}
+
+factorCalc.addEventListener('click', () => {
+  const n = parseInt(factorInput.value);
+  const result = calculateFactorial(n);
+  if (result.startsWith('Error')) {
+    factorOutput.innerHTML = `<span class="danger">${result}</span>`;
+  } else {
+    factorOutput.innerHTML = `<span class="success">${n}! = ${result}</span>`;
+  }
+});
+
+factorClear.addEventListener('click', () => {
+  factorInput.value = '';
+  factorOutput.textContent = 'Result will appear here.';
+});
+
+factorInput.addEventListener('keypress', (e) => {
+  if (e.key === 'Enter') factorCalc.click();
+});
+
+// Guessing Game
+let targetNumber = Math.floor(Math.random() * 100) + 1;
+let attempts = 0;
+let gameOver = false;
+
+const guessInput = document.getElementById('guess-input');
+const guessSubmit = document.getElementById('guess-submit');
+const guessNew = document.getElementById('guess-new');
+const guessOutput = document.getElementById('guess-output');
+const guessAttempts = document.getElementById('guess-attempts');
+
+function newGame() {
+  targetNumber = Math.floor(Math.random() * 100) + 1;
+  attempts = 0;
+  gameOver = false;
+  guessInput.value = '';
+  guessOutput.textContent = 'Make your first guess!';
+  guessAttempts.textContent = '';
+  guessInput.disabled = false;
+  guessSubmit.disabled = false;
+}
+
+guessSubmit.addEventListener('click', () => {
+  if (gameOver) return;
+  
+  const guess = parseInt(guessInput.value);
+  
+  if (isNaN(guess) || guess < 1 || guess > 100) {
+    guessOutput.innerHTML = '<span class="danger">Please enter a number between 1 and 100</span>';
+    return;
+  }
+  
+  attempts++;
+  
+  if (guess === targetNumber) {
+    guessOutput.innerHTML = `<span class="success">🎉 Correct! You guessed it in ${attempts} attempt${attempts > 1 ? 's' : ''}!</span>`;
+    gameOver = true;
+    guessInput.disabled = true;
+    guessSubmit.disabled = true;
+  } else if (guess < targetNumber) {
+    guessOutput.innerHTML = '<span class="muted">📈 Too low! Try a higher number.</span>';
+    guessAttempts.textContent = `Attempts: ${attempts}`;
+  } else {
+    guessOutput.innerHTML = '<span class="muted">📉 Too high! Try a lower number.</span>';
+    guessAttempts.textContent = `Attempts: ${attempts}`;
+  }
+  
+  guessInput.value = '';
+  guessInput.focus();
+});
+
+guessNew.addEventListener('click', () => {
+  newGame();
+});
+
+guessInput.addEventListener('keypress', (e) => {
+  if (e.key === 'Enter') guessSubmit.click();
+});
+</script>
+</body>
+</html>
