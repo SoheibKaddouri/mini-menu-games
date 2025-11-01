@@ -80,7 +80,11 @@ The application uses a responsive design with a dark theme inspired by modern de
 
 ---
 
+
 ## 🤝 Contribution
 
-Feel free to fork the repository and contribute. Any suggestions for additional simple, self-contained JavaScript tools or games are welcome!
+This is a personal project, but suggestions and feedback are welcome!
 
+***
+
+**Soheib Kaddouri** / **SoheibKaddouri**
