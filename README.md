@@ -27,12 +27,11 @@ A simple, single-page web application featuring two interactive mini-games/tools
 
 ---
 
-## 🌐 Live Site Deployment
+## 📸 Application Screenshot
 
-Experience the application live: [https://soheibkaddouri.github.io/mini-menu-games/](https://soheibkaddouri.github.io/mini-menu-games/)
+A look at the website's main interface and design:
 
-**View the Repository Here:**
-> https://github.com/SoheibKaddouri/mini-menu-games
+![Mini Menu Games Screenshot](images/screenshot.png)
 
 ---
 
@@ -74,12 +73,14 @@ The application uses a responsive design with a dark theme inspired by modern de
 
 ---
 
-## 📸 Application Screenshot
+## 🌐 Live Site Deployment
 
-![Mini Menu Games Screenshot](images/screenshot.png)
+Experience the application live: [https://soheibkaddouri.github.io/mini-menu-games/](https://soheibkaddouri.github.io/mini-menu-games/)
+
+**View the Repository Here:**
+> https://github.com/SoheibKaddouri/mini-menu-games
 
 ---
-
 
 ## 🤝 Contribution
 
@@ -88,3 +89,4 @@ This is a personal project, but suggestions and feedback are welcome!
 ***
 
 **Soheib Kaddouri** / **SoheibKaddouri**
+
