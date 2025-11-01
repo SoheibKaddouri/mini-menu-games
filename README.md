@@ -41,7 +41,7 @@ This project is a single-file application.
 
 1.  **Clone the repository**:
     ```bash
-    git clone [https://github.com/SoheibKaddouri/mini-menu-games.git](https://github.com/SoheibKaddouri/mini-menu-games.git)
+    git clone https://github.com/SoheibKaddouri/mini-menu-games.git
     ```
 2.  **Navigate to the project directory:**
     ```bash
@@ -92,5 +92,6 @@ This is a personal project, but suggestions and feedback are welcome!
 ***
 
 **Soheib Kaddouri** / **SoheibKaddouri**
+
 
 
