@@ -42,9 +42,12 @@ This project is a single-file application.
 1.  **Clone the repository**:
     ```bash
     git clone [https://github.com/SoheibKaddouri/mini-menu-games.git](https://github.com/SoheibKaddouri/mini-menu-games.git)
+    ```
+2.  **Navigate to the project directory:**
+    ```bash
     cd mini-menu-games
     ```
-2.  **Open the file**: Simply open the `index.html` file in any modern web browser, or view the **Live Demo** link above.
+3.  **Open the file**: Simply open the `index.html` file in any modern web browser.
 
 ### Using the Calculator
 1.  Click the **"1. Factorial"** menu item (it's the default view).
@@ -89,4 +92,5 @@ This is a personal project, but suggestions and feedback are welcome!
 ***
 
 **Soheib Kaddouri** / **SoheibKaddouri**
+
 
